@@ -22,8 +22,11 @@ class Program
 
     private static void OnUpdate(GraphicsContext gfx, float dt)
     {
+        var rectangleFinestra = new Rectangle(
+            0, 0, finestra.Width, finestra.Height
+            );
         gfx.Clear(Color.Blue);
-        cavaller.Mou();
+        cavaller.Mou(rectangleFinestra);
         cavaller.Pinta(gfx);
     }
 }

@@ -22,24 +22,31 @@ public class Cavaller
     }
 
 
-    public void Mou()
+    public void Mou(Rectangle finestra)
     {
+        var novaPosicio = new Rectangle(posicio,_imatge.Size);
         if(Input.CheckKey(Key.A, ButtonState.Down))
         {
-            posicio.X -= velocitat;
+            novaPosicio.X -= velocitat;
         }
         
         if(Input.CheckKey(Key.D, ButtonState.Down))
         {
-            posicio.X += velocitat;
+            novaPosicio.X += velocitat;
         }
         if(Input.CheckKey(Key.W, ButtonState.Down))
         {
-            posicio.Y -= velocitat;
+            novaPosicio.Y -= velocitat;
         }
         if(Input.CheckKey(Key.S, ButtonState.Down))
         {
-            posicio.Y += velocitat;
+            novaPosicio.Y += velocitat;
+        }
+
+        if (finestra.Contains(novaPosicio))
+        {
+            posicio.X = novaPosicio.X;
+            posicio.Y = novaPosicio.Y;
         }
             
     }

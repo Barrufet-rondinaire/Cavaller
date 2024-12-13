@@ -6,14 +6,15 @@ namespace MovimentImatge;
 class Program
 {
     private static Window finestra;
-    private static Image cavaller;
+    private static Cavaller cavaller;
     
     static void Main()
     {
         Application.Run(() =>
         {
             finestra = new Window("La finestra", (800, 600));
-            cavaller = new Image("imatges/cavaller.png");
+            finestra.MoveToCenter();
+            cavaller = new Cavaller(10,10);
             var loop = GameLoop.Create(finestra.Graphics, OnUpdate);
             loop.Start();
         });
@@ -22,6 +23,7 @@ class Program
     private static void OnUpdate(GraphicsContext gfx, float dt)
     {
         gfx.Clear(Color.Blue);
-        gfx.DrawImage(cavaller, new Vector(10,10));
+        cavaller.Mou();
+        cavaller.Pinta(gfx);
     }
 }

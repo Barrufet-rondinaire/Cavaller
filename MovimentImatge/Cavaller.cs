@@ -49,4 +49,12 @@ public class Cavaller
         }
             
     }
+
+    public bool HaCapturatUnaGranota(Granota granota)
+    {
+        var rectangleCavaller = new Rectangle(_posicio, _imatge.Size);
+        var rectangleGranota = granota.Posicio();
+
+        return rectangleCavaller.Overlaps(rectangleGranota);
+    }
 }

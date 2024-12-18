@@ -4,49 +4,48 @@ namespace MovimentImatge;
 
 public class Cavaller
 {
-    private Image _imatge;
-    private Vector posicio;
-    private int velocitat;
+    private readonly Image _imatge;
+    private Vector _posicio;
+    private readonly int _velocitat;
 
     public Cavaller(int x, int y)
     {
         _imatge = new Image("imatges/cavaller.png");
-        velocitat = 3;
-        posicio = new Vector(x, y);
+        _velocitat = 3;
+        _posicio = new Vector(x, y);
     }
 
     public void Pinta(GraphicsContext gfx)
     {
-        gfx.DrawImage(_imatge, posicio);
+        gfx.DrawImage(_imatge, _posicio);
         
     }
-
-
+    
     public void Mou(Rectangle finestra)
     {
-        var novaPosicio = new Rectangle(posicio,_imatge.Size);
+        var novaPosicio = new Rectangle(_posicio,_imatge.Size);
         if(Input.CheckKey(Key.A, ButtonState.Down))
         {
-            novaPosicio.X -= velocitat;
+            novaPosicio.X -= _velocitat;
         }
         
         if(Input.CheckKey(Key.D, ButtonState.Down))
         {
-            novaPosicio.X += velocitat;
+            novaPosicio.X += _velocitat;
         }
         if(Input.CheckKey(Key.W, ButtonState.Down))
         {
-            novaPosicio.Y -= velocitat;
+            novaPosicio.Y -= _velocitat;
         }
         if(Input.CheckKey(Key.S, ButtonState.Down))
         {
-            novaPosicio.Y += velocitat;
+            novaPosicio.Y += _velocitat;
         }
 
         if (finestra.Contains(novaPosicio))
         {
-            posicio.X = novaPosicio.X;
-            posicio.Y = novaPosicio.Y;
+            _posicio.X = novaPosicio.X;
+            _posicio.Y = novaPosicio.Y;
         }
             
     }

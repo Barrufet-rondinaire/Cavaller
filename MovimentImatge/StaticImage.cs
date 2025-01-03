@@ -5,14 +5,12 @@ namespace MovimentImatge;
 public class StaticImage
 {
     private readonly Image _imatge;
-    private Vector _posicio;
     private string textToPrint;
 
 
     public StaticImage(string imageName, string text = "")
     {
         _imatge = new Image(imageName);
-        _posicio = new Vector();
         textToPrint = text;
         
     }

@@ -6,11 +6,11 @@ namespace MovimentImatge;
 public class Marcador
 {
     public int Vides { get; set; }
-    private Window pantalla;
+    private readonly Window _pantalla;
 
     public Marcador(Window pantalla, int vides)
     {
-        this.pantalla = pantalla;
+        this._pantalla = pantalla;
         Vides = vides;
     }
 
@@ -20,8 +20,8 @@ public class Marcador
     }
     public void Pinta()
     {
-        var posicio = ((Vector)pantalla.Graphics.Surface.Size)* 0.95f;
-        pantalla.Graphics.DrawText($"Et queden {Vides} vides", 
+        var posicio = ((Vector)_pantalla.Graphics.Surface.Size)* 0.95f;
+        _pantalla.Graphics.DrawText($"Et queden {Vides} vides", 
             posicio,
             Font.Default,
             30,

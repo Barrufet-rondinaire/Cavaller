@@ -13,7 +13,7 @@ class Program
 
     private static Joc _joc = null!;
     
-    private static bool FullScreen = false;
+    private static readonly bool FullScreen = false;
     
     static void Main()
     {
@@ -24,7 +24,7 @@ class Program
             _finestra.MoveToCenter();
             
             _joc = new Joc(_finestra, Numgranotes, Vides, FullScreen);
-            _joc.inicialitza();
+            _joc.Inicialitza();
             
             var loop = GameLoop.Create(_finestra.Graphics, OnUpdate);
             loop.Start();

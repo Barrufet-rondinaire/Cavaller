@@ -5,13 +5,13 @@ namespace MovimentImatge;
 public class StaticImage
 {
     private readonly Image _imatge;
-    private string textToPrint;
+    private string _textToPrint;
 
 
     public StaticImage(string imageName, string text = "")
     {
         _imatge = new Image(imageName);
-        textToPrint = text;
+        _textToPrint = text;
         
     }
     
@@ -38,7 +38,7 @@ public class StaticImage
         // Centra(pantalla);
         gfx.DrawImage(_imatge, AjustaPosicio(pantalla));
         var posicio = ((Vector)gfx.Surface.Size)* 0.70f;
-        gfx.DrawText(textToPrint, 
+        gfx.DrawText(_textToPrint, 
             posicio,
             Font.Default,
             30,
@@ -52,6 +52,6 @@ public class StaticImage
 
     public void RemoveText()
     {
-        textToPrint = "";
+        _textToPrint = "";
     }
 }

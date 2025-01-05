@@ -5,40 +5,37 @@ namespace MovimentImatge;
 
 public class Joc
 {
-    private int numGranotes = 0;
-    private int Vides = 10;
-
+    private readonly int _numGranotes;
+    private readonly int _vides;
     private string _fase = "playing";
-    private static bool FullScreen = false;
+    private static bool _fullScreen;
 
-    private Window finestra;
+    private readonly Window _finestra;
     private Cavaller _cavaller = null!;
-    private List<Granota> _granotes = new();
-    
+    private readonly List<Granota> _granotes = new();
     private StaticImage _final = null!;
     private StaticImage _failed = null!;
-
     private Marcador _marcador = null!;
 
-
-
+    
     public Joc(Window espai, int quantesGranotes = 4, int vides = 10, bool fullscreen = false)
     {
-        numGranotes = quantesGranotes;
-        finestra = espai;
-        FullScreen = fullscreen;
+        _numGranotes = quantesGranotes;
+        _finestra = espai;
+        _fullScreen = fullscreen;
+        _vides = vides;
     }
 
-    public void inicialitza() {
+    public void Inicialitza() {
             // Mida de la finestra, cal per poder posar els personatges a dins
             var rectangleFinestra = new Rectangle(
                 0, 0,
-                finestra.Width, finestra.Height
+                _finestra.Width, _finestra.Height
             );
             
             // Crea les granotes
             var esPrincesa = true;
-            for(var i=0; i < numGranotes; i++)
+            for(var i=0; i < _numGranotes; i++)
             {
                 _granotes.Add(new Granota(rectangleFinestra, esPrincesa));
                 esPrincesa = false;
@@ -53,7 +50,7 @@ public class Joc
             _failed = new StaticImage("imatges/failed.png", "Press enter to continue...");
             
             // Marcador
-            _marcador = new Marcador(finestra, Vides);
+            _marcador = new Marcador(_finestra, _vides);
             
             // Comencem jugant!
             _fase = "playing";
@@ -70,20 +67,20 @@ public class Joc
         // ESC tanca la finestra
         if (Input.CheckKey(Key.Escape, ButtonState.Pressed))
         {
-            finestra.Close();
+            _finestra.Close();
         }
 
         if (Input.CheckKey(Key.F11, ButtonState.Pressed))
         {
-            if (FullScreen)
+            if (_fullScreen)
             {
-                finestra.BeginFullscreen();
+                _finestra.BeginFullscreen();
             }
             else
             {
-                finestra.EndFullscreen();
+                _finestra.EndFullscreen();
             }
-            FullScreen = !FullScreen;
+            _fullScreen = !_fullScreen;
         }
     }
 
@@ -95,7 +92,7 @@ public class Joc
         // surtin de la pantalla
         var rectangleFinestra = new Rectangle(
             0, 0,
-            finestra.Width, finestra.Height
+            _finestra.Width, _finestra.Height
         );
         
         // Fes el que toca en funció de la fase en que estem
@@ -135,8 +132,6 @@ public class Joc
     /// <summary>
     ///  El cavaller i les granotes es mouen fins que en capturi alguna
     /// </summary>
-    /// <param name="gfx"></param>
-    /// <param name="dt"></param>
     /// <param name="rectangleFinestra">Mida de la pantalla</param>
     private void Juga(Rectangle rectangleFinestra)
     {
@@ -168,36 +163,35 @@ public class Joc
         Pinta();
     }
 
-    public void Pinta() {
-        finestra.Graphics.Clear(Color.Blue);
-        finestra.Graphics.PushState(true);
+    private void Pinta() {
+        _finestra.Graphics.Clear(Color.Blue);
+        _finestra.Graphics.PushState(true);
         {
             foreach (var granota in _granotes)
             {
-                granota.Pinta(finestra.Graphics);
+                granota.Pinta(_finestra.Graphics);
             }
 
-            _cavaller.Pinta(finestra.Graphics);
+            _cavaller.Pinta(_finestra.Graphics);
             _marcador.Pinta();
         }
-        finestra.Graphics.PopState();
+        _finestra.Graphics.PopState();
     }
 
     /// <summary>
     /// Pinta la pantalla de victòria
     /// </summary>
-    /// <param name="gfx"></param>
     /// <param name="rectangleFinestra"></param>
     private void GameOver(Rectangle rectangleFinestra)
     {
-        finestra.Graphics.Clear(Color.Pink);
-        _final.Pinta(finestra.Graphics, rectangleFinestra);
+        _finestra.Graphics.Clear(Color.Pink);
+        _final.Pinta(_finestra.Graphics, rectangleFinestra);
     }
 
     // Pinta la pantalla de "ha fallat"
     private void PantallaError(Rectangle rectangleFinestra)
     {
-        finestra.Graphics.Clear(Color.White);
-        _failed.Pinta(finestra.Graphics, rectangleFinestra);
+        _finestra.Graphics.Clear(Color.White);
+        _failed.Pinta(_finestra.Graphics, rectangleFinestra);
     }
 }

@@ -4,7 +4,7 @@ namespace MovimentImatge;
 
 public class Granota
 {
-    Random random = new Random();
+    private readonly Random _random = new Random();
     private Vector _posicio;
     private Image _imatge;
     public bool EsPrincesa { get; }
@@ -12,8 +12,8 @@ public class Granota
     public Granota(bool esPrincesa)
     {
         _imatge = new Image("imatges/granota.png");
-        _posicio = new Vector(random.Next(800 - _imatge.Width)
-                    ,random.Next(600) - _imatge.Height);
+        _posicio = new Vector(_random.Next(800 - _imatge.Width)
+                    ,_random.Next(600) - _imatge.Height);
         EsPrincesa = esPrincesa;
 
     }

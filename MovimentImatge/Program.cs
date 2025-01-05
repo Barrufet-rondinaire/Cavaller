@@ -17,7 +17,7 @@ class Program
             _finestra = new Window("La finestra", (800, 600));
             _finestra.MoveToCenter();
            _joc = new Joc(_finestra, GranotesInicials);       
-           _joc.inicialitza();     
+           _joc.Inicialitza();     
             var loop = GameLoop.Create(_finestra.Graphics, OnUpdate);
             loop.Start();
         });

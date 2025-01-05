@@ -5,21 +5,21 @@ namespace MovimentImatge;
 
 public class Joc
 {
-    private int numGranotes = 0;
-    private Window finestra;
+    private readonly int _numGranotes;
+    private readonly Window _finestra;
     private Cavaller _cavaller = null!;
-    private List<Granota> _granotes = new();
+    private readonly List<Granota> _granotes = new();
 
     public Joc(Window espai, int quantesGranotes)
     {
-        numGranotes = quantesGranotes;
-        finestra = espai;
+        _numGranotes = quantesGranotes;
+        _finestra = espai;
     }
 
-    public void inicialitza() {
+    public void Inicialitza() {
         _cavaller = new Cavaller(10,10);
-        bool princesa = true;
-        for (int i = 0; i < numGranotes; i++)
+        var princesa = true;
+        for (int i = 0; i < _numGranotes; i++)
         {
             _granotes.Add(new Granota(princesa));
             princesa = false;
@@ -28,7 +28,7 @@ public class Joc
 
     public void MouPersonatges() {
         var rectangleFinestra = new Rectangle(
-            0, 0, finestra.Width, finestra.Height
+            0, 0, _finestra.Width, _finestra.Height
             );
         _cavaller.Mou(rectangleFinestra);
         foreach (var granota in _granotes)
@@ -49,12 +49,12 @@ public class Joc
     }
 
     public void Pinta() {
-         finestra.Graphics.Clear(Color.Blue);
+         _finestra.Graphics.Clear(Color.Blue);
 
-        _cavaller.Pinta(finestra.Graphics);
+        _cavaller.Pinta(_finestra.Graphics);
         foreach (var granota in _granotes)
         {
-            granota.Pinta(finestra.Graphics);
+            granota.Pinta(_finestra.Graphics);
         }
     }
 }
